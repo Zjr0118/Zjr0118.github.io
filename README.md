@@ -49,6 +49,8 @@ git commit -m "新增文章：xxx"
 git push origin main
 ```
 
+> 注意 `date` 不能晚于当前时间。Jekyll 默认不生成「未来文章」——写成今天 23:00 而现在是上午，这篇文章就不会出现（也不报错）。想让定时发布生效，在 `_config.yml` 加 `future: true`。
+
 4. 等 1～3 分钟，刷新 https://zjr0118.github.io 。构建进度在仓库 **Actions** 页看。
 
 > 日期或文件名格式错 = 文章不生成页面，这是最高频的坑。
