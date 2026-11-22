@@ -1,0 +1,54 @@
+---
+layout: default
+---
+<div class="container">
+  <section class="hero">
+    <p class="hero-eyebrow">HELLO, WORLD</p>
+    <h1 class="hero-title">{{ site.title }}</h1>
+    <p class="hero-desc">{{ site.description }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ '/archive/' | relative_url }}">浏览全部文章</a>
+      <a class="btn btn-ghost" href="{{ '/feed.xml' | relative_url }}">订阅 RSS</a>
+    </div>
+  </section>
+
+  <div class="home-layout">
+    <div class="home-main">
+      {{ content }}
+    </div>
+
+    <aside class="home-side">
+      <div class="side-card about-card">
+        <div class="avatar" aria-hidden="true">{{ site.author.name | slice: 0 }}</div>
+        <h2 class="side-title">{{ site.author.name }}</h2>
+        <p class="side-text">{{ site.author.bio }}</p>
+        <a class="side-link" href="{{ site.author.url }}" target="_blank" rel="noopener">GitHub 主页 →</a>
+      </div>
+
+      {% if site.tags.size > 0 %}
+      <div class="side-card">
+        <h2 class="side-title">热门标签</h2>
+        <div class="tag-cloud">
+          {% for tag in site.tags limit: 18 %}
+            {% assign tag_name = tag[0] %}
+            {% assign tag_posts = tag[1] %}
+            <a class="tag-chip" href="{{ '/tags/#' | append: tag_name | relative_url }}">{{ tag_name }}<span class="chip-count">{{ tag_posts.size }}</span></a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="side-card">
+        <h2 class="side-title">最新文章</h2>
+        <ul class="side-posts">
+          {% for post in site.posts limit: 5 %}
+            <li>
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%m-%d" }}</time>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
